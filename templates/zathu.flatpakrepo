@@ -4,6 +4,6 @@ Url=https://flatpak.zathu.net/
 Homepage=https://majestictab.zathu.net/#download
 Comment=Apps from Zathu Software
 Description=Flatpak apps from Zathu Software, updated straight from each project's CI.
-Icon=https://zathu.net/assets/icons/majestictab.png
+Icon=https://zathu.net/assets/favicon.svg
 RuntimeRepo=https://dl.flathub.org/repo/flathub.flatpakrepo
 GPGKey=@GPGKEY@
