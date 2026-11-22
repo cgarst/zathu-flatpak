@@ -1,0 +1,11 @@
+[Flatpak Ref]
+Title=MajesticTab (Canary)
+Name=net.zathu.majestictab
+Branch=canary
+Url=https://flatpak.zathu.net/
+SuggestRemoteName=zathu
+IsRuntime=false
+Homepage=https://majestictab.zathu.net/
+Icon=https://zathu.net/assets/icons/majestictab.png
+RuntimeRepo=https://dl.flathub.org/repo/flathub.flatpakrepo
+GPGKey=@GPGKEY@

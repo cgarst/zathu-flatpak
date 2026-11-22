@@ -42,8 +42,14 @@ Or run the workflow by hand from the Actions tab. New projects must be added to 
 
 - Every project's Flatpak must ship a valid metainfo file and a stable app id; Discover builds its listing from the
   appstream data in the commits.
-- Bundles are imported onto whatever branch they were built with (MajesticTab: `master`, the flatpak-builder default).
-  The `.flatpakref` templates assume that.
+- Bundles are imported onto whatever branch they were built with. MajesticTab uses two branches of the same app id:
+  `stable` and `canary`. Build with `flatpak-builder --default-branch=stable|canary` (or `flatpak build-bundle ... <app-id> <branch>`).
+  Install with `flatpak install zathu net.zathu.majestictab//stable` (or `//canary`), or use
+  `net.zathu.majestictab.flatpakref` / `net.zathu.majestictab.canary.flatpakref`. Only one branch should be installed at
+  a time: they share the app id, data directory and exported `.desktop` file.
+- Prune depth is per ref, so each branch keeps its own last 3 commits.
+- Older installs were on `master`. That ref stays in the mirrored repo but no longer gets updates; those users must
+  reinstall from the `stable` ref.
 - Runtimes (GNOME) come from Flathub: `RuntimeRepo` in the `.flatpakrepo` makes Flatpak add it if missing.
 - Pages limits: 1 GB site, 100 GB/month soft bandwidth. If the repo outgrows that, move the data to a bucket and keep
   the same URL.

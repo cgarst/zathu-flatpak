@@ -1,7 +1,7 @@
 [Flatpak Ref]
 Title=MajesticTab
 Name=net.zathu.majestictab
-Branch=master
+Branch=stable
 Url=https://flatpak.zathu.net/
 SuggestRemoteName=zathu
 IsRuntime=false
