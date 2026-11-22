@@ -1,0 +1,72 @@
+name: Publish Flatpak repo
+
+# Triggered by a project's release CI (see README) or by hand. Downloads the *.flatpak assets of a GitHub release,
+# adds them to the repo, and redeploys the site.
+on:
+  repository_dispatch:
+    types: [publish-flatpak]
+  workflow_dispatch:
+    inputs:
+      source_repo:
+        description: Repo whose release holds the bundles (owner/name)
+        required: true
+        default: cgarst/MajesticTab
+      tag:
+        description: Release tag
+        required: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One run at a time: each run mirrors the live repo, adds to it, and replaces it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://flatpak.zathu.net/
+    env:
+      SOURCE_REPO: ${{ github.event.client_payload.source_repo || inputs.source_repo }}
+      TAG: ${{ github.event.client_payload.tag || inputs.tag }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y flatpak ostree gnupg
+      - name: Only accept repos on the allowlist
+        run: |
+          case "$SOURCE_REPO" in
+            cgarst/MajesticTab) ;;   # add more projects here
+            *) echo "source repo $SOURCE_REPO is not allowed" >&2; exit 1 ;;
+          esac
+      - name: Download bundles
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir bundles
+          gh release download "$TAG" --repo "$SOURCE_REPO" --pattern '*.flatpak' --dir bundles
+          ls -l bundles
+      - name: Import signing key
+        env:
+          KEY: ${{ secrets.FLATPAK_GPG_PRIVATE_KEY }}
+        run: |
+          export GNUPGHOME="$RUNNER_TEMP/gnupg"; mkdir -m 700 "$GNUPGHOME"
+          printf '%s' "$KEY" | gpg --batch --import
+          echo "GNUPGHOME=$GNUPGHOME" >> "$GITHUB_ENV"
+      - name: Build repo
+        env:
+          FLATPAK_GPG_KEY_ID: ${{ vars.FLATPAK_GPG_KEY_ID }}
+        run: scripts/publish.sh bundles/*.flatpak
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
