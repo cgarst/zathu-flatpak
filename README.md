@@ -1,8 +1,7 @@
 # zathu-flatpak
 
 Flatpak repository for Zathu Software, served at <https://flatpak.zathu.net/> and listed in KDE Discover / GNOME
-Software once a user adds `https://flatpak.zathu.net/zathu.flatpakrepo`. The user-facing page is
-<https://zathu.net/flatpak/>.
+Software once a user adds `https://flatpak.zathu.net/zathu.flatpakrepo`. Install instructions live in MajesticTab's README and landing page.
 
 The OSTree repo is **not stored in git**. Each publish run mirrors the live Pages site, imports the new bundles, signs,
 prunes (keeps 3 commits per ref), and redeploys. The git repo holds only this tooling.

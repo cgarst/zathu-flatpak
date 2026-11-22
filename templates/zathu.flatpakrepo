@@ -1,7 +1,7 @@
 [Flatpak Repo]
 Title=Zathu Software
 Url=https://flatpak.zathu.net/
-Homepage=https://zathu.net/flatpak/
+Homepage=https://majestictab.zathu.net/#download
 Comment=Apps from Zathu Software
 Description=Flatpak apps from Zathu Software, updated straight from each project's CI.
 Icon=https://zathu.net/assets/icons/majestictab.png

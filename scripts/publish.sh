@@ -38,7 +38,7 @@ done
 flatpak build-update-repo \
   --gpg-sign="$FLATPAK_GPG_KEY_ID" --gpg-homedir="$GNUPGHOME" \
   --title="Zathu Software" --comment="Apps from Zathu Software" \
-  --homepage="https://zathu.net/flatpak/" \
+  --homepage="https://majestictab.zathu.net/#download" \
   --generate-static-deltas --prune --prune-depth="$PRUNE_DEPTH" \
   repo
 
@@ -60,8 +60,8 @@ done
 
 cat > site/index.html <<'HTML'
 <!doctype html><meta charset="utf-8"><title>Zathu Software Flatpak repository</title>
-<meta http-equiv="refresh" content="0; url=https://zathu.net/flatpak/">
-<p>This is the Flatpak repository for Zathu Software. See <a href="https://zathu.net/flatpak/">zathu.net/flatpak</a>.</p>
+<meta http-equiv="refresh" content="0; url=https://majestictab.zathu.net/#download">
+<p>This is the Flatpak repository for Zathu Software. Install instructions: <a href="https://majestictab.zathu.net/#download">majestictab.zathu.net</a>.</p>
 HTML
 
 du -sh site
