@@ -38,7 +38,7 @@ done
 flatpak build-update-repo \
   --gpg-sign="$FLATPAK_GPG_KEY_ID" --gpg-homedir="$GNUPGHOME" \
   --title="Zathu Software" --comment="Apps from Zathu Software" \
-  --homepage="https://majestictab.zathu.net/#download" \
+  --homepage="https://zathu.net/" \
   --generate-static-deltas --prune --prune-depth="$PRUNE_DEPTH" \
   repo
 
