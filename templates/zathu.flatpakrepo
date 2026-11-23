@@ -2,6 +2,7 @@
 Title=Zathu Software
 Url=https://flatpak.zathu.net/
 Homepage=https://zathu.net/
+DefaultBranch=stable
 Comment=Apps from Zathu Software
 Description=Flatpak apps from Zathu Software.
 Icon=https://zathu.net/assets/favicon.svg

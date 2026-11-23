@@ -39,6 +39,7 @@ flatpak build-update-repo \
   --gpg-sign="$FLATPAK_GPG_KEY_ID" --gpg-homedir="$GNUPGHOME" \
   --title="Zathu Software" --comment="Apps from Zathu Software" \
   --homepage="https://zathu.net/" \
+  --default-branch=stable \
   --generate-static-deltas --prune --prune-depth="$PRUNE_DEPTH" \
   repo
 
